@@ -256,7 +256,7 @@
      apt-get install -y git
 
      mkdir -p $ODOO_SOURCE_DIR
-     git clone --depth=1 -b ${ODOO_BRANCH} https://github.com/odoo/odoo.git $ODOO_SOURCE_DIR
+     git clone --depth=1 -b ${ODOO_BRANCH} https://github.com/gastonfeng/odoo.git $ODOO_SOURCE_DIR
      chown -R ${ODOO_USER}:${ODOO_USER} $ODOO_SOURCE_DIR
 
      #### Changes on Odoo Code
