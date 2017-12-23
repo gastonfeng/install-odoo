@@ -155,7 +155,7 @@
          dpkg --force-depends -i wkhtmltox.deb
          apt-get install -y ${WKHTMLTOPDF_DEPENDENCIES} || true
          apt-get -y install -f --no-install-recommends
-         apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false npm
+         #apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false npm
          rm -rf /var/lib/apt/lists/* wkhtmltox.deb
      fi
 
