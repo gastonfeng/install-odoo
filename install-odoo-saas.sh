@@ -153,12 +153,12 @@
      then
          #curl -o wkhtmltox.deb -SL ${WKHTMLTOPDF_DEB_URL}
          dpkg --force-depends -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
-         apt-get install -y ${WKHTMLTOPDF_DEPENDENCIES} || true
+         #apt-get install -y ${WKHTMLTOPDF_DEPENDENCIES} || true
          apt-get -y install -f --no-install-recommends
          #apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false npm
-         rm -rf /var/lib/apt/lists/* wkhtmltox.deb
+         #rm -rf /var/lib/apt/lists/* wkhtmltox.deb
      fi
-
+	 apt-get update
      apt-get install -y adduser node-less node-clean-css python python-dateutil python-decorator python-docutils python-feedparser python-imaging python-jinja2 python-ldap python-libxslt1 python-lxml python-mako python-mock python-openid python-passlib python-psutil python-psycopg2 python-babel python-pychart python-pydot python-pyparsing python-pypdf python-reportlab python-requests python-suds python-tz python-vatnumber python-vobject python-werkzeug python-xlwt python-yaml
      apt-get install -y python-gevent python-simplejson
 
@@ -172,8 +172,8 @@
      pip install psycogreen
      # requirements.txt
      #apt-get install -y postgresql-server-dev-all python-dev  build-essential libxml2-dev libxslt1-dev 
-     #cd $ODOO_SOURCE_DIR
-     #pip install -r requirements.txt
+     cd $ODOO_SOURCE_DIR
+     pip install -r requirements.txt
 
      # fix error with jpeg (if you get it)
      apt-get install -y python-dev build-essential libxml2-dev libxslt1-dev
@@ -413,6 +413,9 @@
      done
  fi
 
+pip uninstall pyOpenSSL -y
+pip install pyOpenSSL 
+rm -rf /usr/local/src/odoo-extra-addons/it-projects-llc/misc-addons/currency_rate_update
 
  if [[ "$INIT_NGINX" != "no" ]]
  then
