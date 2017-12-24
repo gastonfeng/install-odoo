@@ -151,8 +151,8 @@
      fi
      if [[ "$WKHTMLTOPDF_INSTALLED" == "no" ]]
      then
-         curl -o wkhtmltox.deb -SL ${WKHTMLTOPDF_DEB_URL}
-         dpkg --force-depends -i wkhtmltox.deb
+         #curl -o wkhtmltox.deb -SL ${WKHTMLTOPDF_DEB_URL}
+         dpkg --force-depends -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
          apt-get install -y ${WKHTMLTOPDF_DEPENDENCIES} || true
          apt-get -y install -f --no-install-recommends
          #apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false npm
