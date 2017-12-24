@@ -153,14 +153,15 @@
      then
          #curl -o wkhtmltox.deb -SL ${WKHTMLTOPDF_DEB_URL}
          dpkg --force-depends -i wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
+		 dpkg --force-depends -i xfonts-75dpi_1.0.3_all.deb
          #apt-get install -y ${WKHTMLTOPDF_DEPENDENCIES} || true
          apt-get -y install -f --no-install-recommends
          #apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false npm
          #rm -rf /var/lib/apt/lists/* wkhtmltox.deb
      fi
 	 apt-get update
-     apt-get install -y adduser node-less node-clean-css python python-dateutil python-decorator python-docutils python-feedparser python-imaging python-jinja2 python-ldap python-libxslt1 python-lxml python-mako python-mock python-openid python-passlib python-psutil python-psycopg2 python-babel python-pychart python-pydot python-pyparsing python-pypdf python-reportlab python-requests python-suds python-tz python-vatnumber python-vobject python-werkzeug python-xlwt python-yaml
-     apt-get install -y python-gevent python-simplejson
+     apt-get install -y adduser node-less node-clean-css python python-dateutil python-decorator python-docutils python-feedparser python-imaging python-jinja2 python-ldap python-libxslt1 python-lxml python-mako python-mock python-openid python-passlib python-psutil python-psycopg2 python-babel python-pychart python-pydot python-pyparsing python-pypdf python-reportlab python-requests python-suds python-tz python-vatnumber python-vobject python-werkzeug python-xlwt python-yaml --fix-missing
+     apt-get install -y python-gevent python-simplejson --fix-missing
 
      if [[ "$ODOO_BRANCH" == "8.0" ]]
      then
