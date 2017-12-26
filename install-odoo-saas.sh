@@ -173,8 +173,6 @@
      pip install psycogreen
      # requirements.txt
      #apt-get install -y postgresql-server-dev-all python-dev  build-essential libxml2-dev libxslt1-dev 
-     cd $ODOO_SOURCE_DIR
-     pip install -r requirements.txt
 
      # fix error with jpeg (if you get it)
      apt-get install -y python-dev build-essential libxml2-dev libxslt1-dev
@@ -262,6 +260,7 @@
 
      #### Changes on Odoo Code
      cd $ODOO_SOURCE_DIR
+     pip install -r requirements.txt
      ## delete matches="..." at /web/database/manager
      sed -i 's/matches="[^"]*"//g' addons/web/static/src/xml/base.xml
  fi
