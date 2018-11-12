@@ -50,7 +50,7 @@
  export ODOO_DOMAIN=${ODOO_DOMAIN:-odoo.example.com}
  export ODOO_DATABASE=${ODOO_DATABASE:-odoo.example.com}
  export ODOO_USER=${ODOO_USER:-odoo}
- export ODOO_BRANCH=${ODOO_BRANCH:-10.0}
+ export ODOO_BRANCH=${ODOO_BRANCH:-11.0}
  export ODOO_MASTER_PASS=${ODOO_MASTER_PASS:-`< /dev/urandom tr -dc A-Za-z0-9 | head -c16;echo;`}
 
  ## Nginx
@@ -112,10 +112,10 @@
              curl \
              node-less \
              node-clean-css \
-             python-pyinotify \
-             python-renderpm
+             python3-pyinotify \
+             python3-renderpm
 
-     curl --silent https://bootstrap.pypa.io/get-pip.py | python
+     curl --silent https://bootstrap.pypa.io/get-pip.py | python3
 
      ## wkhtmltopdf
      WKHTMLTOPDF_INSTALLED="no"
@@ -159,24 +159,24 @@
          rm -rf /var/lib/apt/lists/* wkhtmltox.deb
      fi
 
-     apt-get install -y adduser node-less node-clean-css python python-dateutil python-decorator python-docutils python-feedparser python-imaging python-jinja2 python-ldap python-libxslt1 python-lxml python-mako python-mock python-openid python-passlib python-psutil python-psycopg2 python-babel python-pychart python-pydot python-pyparsing python-pypdf python-reportlab python-requests python-suds python-tz python-vatnumber python-vobject python-werkzeug python-xlwt python-yaml
-     apt-get install -y python-gevent python-simplejson
+     apt-get install -y adduser node-less node-clean-css python3 python3-dateutil python3-decorator python3-docutils python3-feedparser python3-imaging python3-jinja2 python3-ldap python-libxslt1 python3-lxml python3-mako python3-mock python3-openid python3-passlib python3-psutil python3-psycopg2 python3-babel python-pychart python3-pydot python3-pyparsing python-pypdf python3-reportlab python3-requests python3-suds python3-tz python3-vatnumber python-vobject python3-werkzeug python-xlwt python3-yaml
+     apt-get install -y python3-gevent python3-simplejson
 
      if [[ "$ODOO_BRANCH" == "8.0" ]]
      then
-         apt-get install -y python-unittest2
+         apt-get install -y python3-unittest2
      fi
 
 
      pip3 install "werkzeug<0.12" --upgrade
      pip3 install psycogreen
      # requirements.txt
-     #apt-get install -y postgresql-server-dev-all python-dev  build-essential libxml2-dev libxslt1-dev 
+     #apt-get install -y postgresql-server-dev-all python3-dev  build-essential libxml2-dev libxslt1-dev 
      #cd $ODOO_SOURCE_DIR
      #pip3 install -r requirements.txt
 
      # fix error with jpeg (if you get it)
-     apt-get install -y python-dev build-essential libxml2-dev libxslt1-dev
+     apt-get install -y python3-dev build-essential libxml2-dev libxslt1-dev
      # uninstall PIL
      pip3 uninstall PIL || echo "PIL is not installed"
      if [[ "$OS_RELEASE" == "jessie" ]]
@@ -563,7 +563,7 @@
      then
          BACKUP_EXEC="root docker exec -u root -i -t ${ODOO_DOCKER} /usr/local/bin/odoo-backup.py -d ${ODOO_DATABASE} -c ${OPENERP_SERVER} -p ${BACKUPS_DIR}"
      fi
-     echo "### check url for undestanding time parameters: https://github.com/xolox/python-rotate-backups" >> /etc/crontab
+     echo "### check url for undestanding time parameters: https://github.com/xolox/python3-rotate-backups" >> /etc/crontab
      echo -e "#6 6\t* * *\t${BACKUP_EXEC} --no-save-filestore --daily 8 --weekly 0 --monthly 0 --yearly 0" >> /etc/crontab
      echo -e "#4 4\t* * 7\t${BACKUP_EXEC}" >> /etc/crontab
      ## to test run:
@@ -574,5 +574,5 @@
 
 if [[ "$CLEAN" == "yes" ]]
 then
-    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false python-pip *-dev
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false python3-pip *-dev
 fi
