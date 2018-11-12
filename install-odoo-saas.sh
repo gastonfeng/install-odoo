@@ -168,17 +168,17 @@
      fi
 
 
-     pip install "werkzeug<0.12" --upgrade
-     pip install psycogreen
+     pip3 install "werkzeug<0.12" --upgrade
+     pip3 install psycogreen
      # requirements.txt
      #apt-get install -y postgresql-server-dev-all python-dev  build-essential libxml2-dev libxslt1-dev 
      #cd $ODOO_SOURCE_DIR
-     #pip install -r requirements.txt
+     #pip3 install -r requirements.txt
 
      # fix error with jpeg (if you get it)
      apt-get install -y python-dev build-essential libxml2-dev libxslt1-dev
      # uninstall PIL
-     pip uninstall PIL || echo "PIL is not installed"
+     pip3 uninstall PIL || echo "PIL is not installed"
      if [[ "$OS_RELEASE" == "jessie" ]]
      then
          apt-get install libjpeg62-turbo-dev zlib1g-dev -y
@@ -189,7 +189,7 @@
          apt-get install libjpeg-dev zlib1g-dev -y
      fi
      # reinstall pillow
-     pip install -I pillow
+     pip3 install -I pillow
      # (from here https://github.com/odoo/odoo/issues/612 )
 
      # ## Less CSS via nodejs
@@ -206,12 +206,12 @@
      ### Deps for Odoo Saas Tool
      # TODO replace it with deb packages
      apt-get install -y libffi-dev libssl-dev
-     pip install Boto
-     pip install FileChunkIO
-     pip install pysftp
-     pip install rotate-backups
-     pip install oauthlib
-     pip install requests --upgrade
+     pip3 install Boto
+     pip3 install FileChunkIO
+     pip3 install pysftp
+     pip3 install rotate-backups
+     pip3 install oauthlib
+     pip3 install requests --upgrade
  fi
 
  if [[ "$INIT_POSTGRESQL" != "no" ]]
