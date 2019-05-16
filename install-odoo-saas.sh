@@ -576,3 +576,4 @@ if [[ "$CLEAN" == "yes" ]]
 then
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false python-pip *-dev
 fi
+chmod 777 -R /opt/odoo/.local/share/Odoo
