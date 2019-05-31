@@ -256,7 +256,7 @@
      apt-get install -y git
 
      mkdir -p $ODOO_SOURCE_DIR
-     git clone --depth=1 -b ${ODOO_BRANCH} https://github.com/odoo/odoo.git $ODOO_SOURCE_DIR
+     git clone --depth=1 -b ${ODOO_BRANCH} https://github.com/gastonfeng/odoo.git $ODOO_SOURCE_DIR
      chown -R ${ODOO_USER}:${ODOO_USER} $ODOO_SOURCE_DIR
 
      #### Changes on Odoo Code
@@ -272,38 +272,38 @@
 
  if [[ "$CLONE_OCA" == "yes" ]]
  then
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/web.git OCA/web")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/event.git OCA/event")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/website.git OCA/website")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/account-financial-reporting.git OCA/account-financial-reporting")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/account-financial-tools.git OCA/account-financial-tools")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/partner-contact.git OCA/partner-contact")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/hr.git OCA/hr")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/pos.git OCA/pos")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/commission.git OCA/commission")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/server-tools.git OCA/server-tools")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/reporting-engine.git OCA/reporting-engine")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/rma.git OCA/rma")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/contract.git OCA/contract")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/sale-workflow.git OCA/sale-workflow")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/bank-payment.git OCA/bank-payment")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/bank-statement-import.git OCA/bank-statement-import")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/bank-statement-reconcile.git OCA/bank-statement-reconcile")
-     REPOS=( "${REPOS[@]}" " https://github.com/OCA/product-attribute.git OCA/product-attribute")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/account-invoicing.git OCA/account-invoicing")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/account-closing.git OCA/account-closing")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/web.git OCA/web")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/event.git OCA/event")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/website.git OCA/website")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/account-financial-reporting.git OCA/account-financial-reporting")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/account-financial-tools.git OCA/account-financial-tools")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/partner-contact.git OCA/partner-contact")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/hr.git OCA/hr")
+#     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/pos.git OCA/pos")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/commission.git OCA/commission")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/server-tools.git OCA/server-tools")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/reporting-engine.git OCA/reporting-engine")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/rma.git OCA/rma")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/contract.git OCA/contract")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/sale-workflow.git OCA/sale-workflow")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/bank-payment.git OCA/bank-payment")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/bank-statement-import.git OCA/bank-statement-import")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/bank-statement-reconcile.git OCA/bank-statement-reconcile")
+     REPOS=( "${REPOS[@]}" " https://github.com/gastonfeng/product-attribute.git OCA/product-attribute")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/account-invoicing.git OCA/account-invoicing")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/account-closing.git OCA/account-closing")
  fi
 
  if [[ "$CLONE_IT_PROJECTS_LLC" == "yes" ]]
  then
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/e-commerce.git it-projects-llc/e-commerce")
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/pos-addons.git it-projects-llc/pos-addons")
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/access-addons.git it-projects-llc/access-addons")
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/website-addons.git it-projects-llc/website-addons")
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/misc-addons.git it-projects-llc/misc-addons")
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/mail-addons.git it-projects-llc/mail-addons")
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/odoo-saas-tools.git it-projects-llc/odoo-saas-tools")
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/odoo-telegram.git it-projects-llc/odoo-telegram")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/e-commerce.git it-projects-llc/e-commerce")
+     #REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/pos-addons.git it-projects-llc/pos-addons")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/access-addons.git it-projects-llc/access-addons")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/website-addons.git it-projects-llc/website-addons")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/misc-addons.git it-projects-llc/misc-addons")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/mail-addons.git it-projects-llc/mail-addons")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/odoo-saas-tools.git it-projects-llc/odoo-saas-tools")
+#     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/odoo-telegram.git it-projects-llc/odoo-telegram")
  fi
 
  if [[ "${REPOS}" != "" ]]
