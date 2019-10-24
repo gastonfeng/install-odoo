@@ -179,7 +179,7 @@
      #pip3 install -r requirements.txt
 
      # fix error with jpeg (if you get it)
-     #apt-get install -y python3-dev build-essential libxml2-dev libxslt1-dev
+     apt-get install -y  build-essential python3-dev libxml2-dev libxslt1-dev  libsasl2-dev libldap2-dev libssl-dev
      # uninstall PIL
      pip3 uninstall PIL || echo "PIL is not installed"
      #if [[ "$OS_RELEASE" == "jessie" ]]
@@ -222,14 +222,14 @@
     ### PostgreSQL
      if [[ "$INIT_POSTGRESQL" == "docker-container" ]]
      then
-         POSTGRES_PACKAGES="postgresql-client-9.5"
+         POSTGRES_PACKAGES="postgresql-client"
      else
-         POSTGRES_PACKAGES="postgresql-9.5 postgresql-contrib-9.5 postgresql-client-9.5"
+         POSTGRES_PACKAGES="postgresql postgresql-contrib postgresql-client"
      fi
      apt-get install $POSTGRES_PACKAGES -y || \
          curl --silent https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
          apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 7FCC7D46ACCC4CF8 && \
-         echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' >> /etc/apt/sources.list.d/pgdg.list && \
+         echo 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main' >> /etc/apt/sources.list.d/pgdg.list && \
          apt-get update && \
          apt-get install $POSTGRES_PACKAGES -y
  fi
