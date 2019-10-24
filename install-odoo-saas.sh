@@ -182,15 +182,15 @@
      #apt-get install -y python3-dev build-essential libxml2-dev libxslt1-dev
      # uninstall PIL
      pip3 uninstall PIL || echo "PIL is not installed"
-     if [[ "$OS_RELEASE" == "jessie" ]]
-     then
-         apt-get install libjpeg62-turbo-dev zlib1g-dev -y
-     elif [[ "$OS_RELEASE" == "trusty" ]]
-     then
-         apt-get install libjpeg-dev zlib1g-dev -y
-     else
-         apt-get install libjpeg-dev zlib1g-dev -y
-     fi
+     #if [[ "$OS_RELEASE" == "jessie" ]]
+     #then
+     #    apt-get install libjpeg62-turbo-dev zlib1g-dev -y
+     #elif [[ "$OS_RELEASE" == "trusty" ]]
+     #then
+     #    apt-get install libjpeg-dev zlib1g-dev -y
+     #else
+     #    apt-get install libjpeg-dev zlib1g-dev -y
+     #fi
      # reinstall pillow
      pip3 install -I pillow
      # (from here https://github.com/odoo/odoo/issues/612 )
