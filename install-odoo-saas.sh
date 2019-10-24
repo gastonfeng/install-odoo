@@ -179,6 +179,7 @@
      #pip3 install -r requirements.txt
 
      # fix error with jpeg (if you get it)
+	 apt-get update
      apt-get install -y  build-essential python3-dev libxml2-dev libxslt1-dev  libsasl2-dev libldap2-dev libssl-dev
      # uninstall PIL
      pip3 uninstall PIL || echo "PIL is not installed"

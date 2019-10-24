@@ -6,7 +6,7 @@
 apt-get update | grep "Hit http\|Ign http" -C 10000 && echo "There are possible failures on fetching. Try apt-get update again"
 
 apt-get install git -y
-git clone https://github.com/gastonfeng/install-odoo.git#11.0
+git clone https://github.com/gastonfeng/install-odoo.git -b 11.0
 cd install-odoo
 git checkout 11.0
 
