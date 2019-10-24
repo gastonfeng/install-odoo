@@ -50,7 +50,7 @@
  export ODOO_DOMAIN=${ODOO_DOMAIN:-odoo.example.com}
  export ODOO_DATABASE=${ODOO_DATABASE:-odoo.example.com}
  export ODOO_USER=${ODOO_USER:-odoo}
- export ODOO_BRANCH=${ODOO_BRANCH:-11.0}
+ export ODOO_BRANCH=${ODOO_BRANCH:-LITE11}
  export ODOO_MASTER_PASS=${ODOO_MASTER_PASS:-`< /dev/urandom tr -dc A-Za-z0-9 | head -c16;echo;`}
 
  ## Nginx
@@ -259,7 +259,7 @@
      apt-get install -y git
 
      mkdir -p $ODOO_SOURCE_DIR
-     git clone --depth=1 -b ${ODOO_BRANCH} https://github.com/gastonfeng/odoo.git $ODOO_SOURCE_DIR
+     git clone --depth=1 -b ${ODOO_BRANCH} https://github.com/gastonfeng/OCB.git $ODOO_SOURCE_DIR
      chown -R ${ODOO_USER}:${ODOO_USER} $ODOO_SOURCE_DIR
 
      #### Changes on Odoo Code
