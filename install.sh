@@ -19,8 +19,8 @@ INIT_ODOO_CONFIG=yes \
 INIT_USER=yes \
 INIT_DIRS=yes \
 CLONE_ODOO=yes \
-CLONE_IT_PROJECTS_LLC=yes \
-CLONE_OCA=yes \
+CLONE_IT_PROJECTS_LLC=no \
+CLONE_OCA=no \
 UPDATE_ADDONS_PATH=yes \
 ADD_AUTOINSTALL_MODULES="['ir_attachment_force_storage']" \
 /bin/bash -x install-odoo-saas.sh
