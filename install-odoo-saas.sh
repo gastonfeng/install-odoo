@@ -179,7 +179,7 @@
      #pip3 install -r requirements.txt
 
      # fix error with jpeg (if you get it)
-     apt-get install -y python3-dev build-essential libxml2-dev libxslt1-dev
+     #apt-get install -y python3-dev build-essential libxml2-dev libxslt1-dev
      # uninstall PIL
      pip3 uninstall PIL || echo "PIL is not installed"
      if [[ "$OS_RELEASE" == "jessie" ]]
