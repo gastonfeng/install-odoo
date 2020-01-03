@@ -50,7 +50,7 @@
  export ODOO_DOMAIN=${ODOO_DOMAIN:-odoo.example.com}
  export ODOO_DATABASE=${ODOO_DATABASE:-odoo.example.com}
  export ODOO_USER=${ODOO_USER:-odoo}
- export ODOO_BRANCH=${ODOO_BRANCH:-11.0}
+ export ODOO_BRANCH=${ODOO_BRANCH:-LITE11}
  export ODOO_MASTER_PASS=${ODOO_MASTER_PASS:-`< /dev/urandom tr -dc A-Za-z0-9 | head -c16;echo;`}
 
  ## Nginx
@@ -113,7 +113,7 @@
              node-less \
              node-clean-css \
              python3-pyinotify \
-             python3-renderpm
+             python3-renderpm  python3-pip
 
      curl --silent https://bootstrap.pypa.io/get-pip.py | python3
 
@@ -149,6 +149,9 @@
          fi
 
      fi
+
+     apt-get update --allow-insecure-repositories
+
      if [[ "$WKHTMLTOPDF_INSTALLED" == "no" ]]
      then
          curl -o wkhtmltox.deb -SL ${WKHTMLTOPDF_DEB_URL}
@@ -158,9 +161,9 @@
          apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false npm
          rm -rf /var/lib/apt/lists/* wkhtmltox.deb
      fi
-
-     apt-get install -y adduser node-less node-clean-css python3 python3-dateutil python3-decorator python3-docutils python3-feedparser python-imaging python3-jinja2 python-ldap python-libxslt1 python3-lxml python3-mako python3-mock python3-openid python3-passlib python3-psutil python3-psycopg2 python3-babel python-pychart python3-pydot python3-pyparsing python-pypdf python3-reportlab python3-requests python3-suds python3-tz python3-vatnumber python-vobject python3-werkzeug python-xlwt python3-yaml
-     apt-get install -y python3-gevent python3-simplejson
+     apt-get install -y adduser node-less node-clean-css python3 
+	 #python3-dateutil python3-decorator python3-docutils python3-feedparser python3-imaging python3-jinja2 python3-ldap python-libxslt1 python3-lxml python3-mako python3-mock python3-openid python3-passlib python3-psutil python3-psycopg2 python3-babel python-pychart python3-pydot python3-pyparsing python-pypdf python3-reportlab python3-requests python3-suds python3-tz python3-vatnumber python-vobject python3-werkzeug python-xlwt python3-yaml
+     #apt-get install -y python3-gevent python3-simplejson
 
      if [[ "$ODOO_BRANCH" == "8.0" ]]
      then
@@ -176,18 +179,19 @@
      #pip3 install -r requirements.txt
 
      # fix error with jpeg (if you get it)
-     apt-get install -y python3-dev build-essential libxml2-dev libxslt1-dev
+	 apt-get update
+     apt-get install -y  build-essential python3-dev libxml2-dev libxslt1-dev  libsasl2-dev libldap2-dev libssl-dev
      # uninstall PIL
      pip3 uninstall PIL || echo "PIL is not installed"
-     if [[ "$OS_RELEASE" == "jessie" ]]
-     then
-         apt-get install libjpeg62-turbo-dev zlib1g-dev -y
-     elif [[ "$OS_RELEASE" == "trusty" ]]
-     then
-         apt-get install libjpeg-dev zlib1g-dev -y
-     else
-         apt-get install libjpeg-dev zlib1g-dev -y
-     fi
+     #if [[ "$OS_RELEASE" == "jessie" ]]
+     #then
+     #    apt-get install libjpeg62-turbo-dev zlib1g-dev -y
+     #elif [[ "$OS_RELEASE" == "trusty" ]]
+     #then
+     #    apt-get install libjpeg-dev zlib1g-dev -y
+     #else
+     #    apt-get install libjpeg-dev zlib1g-dev -y
+     #fi
      # reinstall pillow
      pip3 install -I pillow
      # (from here https://github.com/odoo/odoo/issues/612 )
@@ -205,7 +209,7 @@
 
      ### Deps for Odoo Saas Tool
      # TODO replace it with deb packages
-     apt-get install -y libffi-dev libssl-dev
+     #apt-get install -y libffi-dev libssl-dev
      pip3 install Boto
      pip3 install FileChunkIO
      pip3 install pysftp
@@ -219,14 +223,14 @@
     ### PostgreSQL
      if [[ "$INIT_POSTGRESQL" == "docker-container" ]]
      then
-         POSTGRES_PACKAGES="postgresql-client-9.5"
+         POSTGRES_PACKAGES="postgresql-client"
      else
-         POSTGRES_PACKAGES="postgresql-9.5 postgresql-contrib-9.5 postgresql-client-9.5"
+         POSTGRES_PACKAGES="postgresql postgresql-contrib postgresql-client"
      fi
      apt-get install $POSTGRES_PACKAGES -y || \
          curl --silent https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
          apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 7FCC7D46ACCC4CF8 && \
-         echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' >> /etc/apt/sources.list.d/pgdg.list && \
+         echo 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main' >> /etc/apt/sources.list.d/pgdg.list && \
          apt-get update && \
          apt-get install $POSTGRES_PACKAGES -y
  fi
@@ -256,7 +260,7 @@
      apt-get install -y git
 
      mkdir -p $ODOO_SOURCE_DIR
-     git clone --depth=1 -b ${ODOO_BRANCH} https://github.com/odoo/odoo.git $ODOO_SOURCE_DIR
+     git clone --depth=1 -b ${ODOO_BRANCH} https://github.com/gastonfeng/OCB.git $ODOO_SOURCE_DIR
      chown -R ${ODOO_USER}:${ODOO_USER} $ODOO_SOURCE_DIR
 
      #### Changes on Odoo Code
@@ -272,38 +276,38 @@
 
  if [[ "$CLONE_OCA" == "yes" ]]
  then
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/web.git OCA/web")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/event.git OCA/event")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/website.git OCA/website")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/account-financial-reporting.git OCA/account-financial-reporting")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/account-financial-tools.git OCA/account-financial-tools")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/partner-contact.git OCA/partner-contact")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/hr.git OCA/hr")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/pos.git OCA/pos")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/commission.git OCA/commission")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/server-tools.git OCA/server-tools")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/reporting-engine.git OCA/reporting-engine")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/rma.git OCA/rma")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/contract.git OCA/contract")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/sale-workflow.git OCA/sale-workflow")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/bank-payment.git OCA/bank-payment")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/bank-statement-import.git OCA/bank-statement-import")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/bank-statement-reconcile.git OCA/bank-statement-reconcile")
-     REPOS=( "${REPOS[@]}" " https://github.com/OCA/product-attribute.git OCA/product-attribute")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/account-invoicing.git OCA/account-invoicing")
-     REPOS=( "${REPOS[@]}" "https://github.com/OCA/account-closing.git OCA/account-closing")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/web.git OCA/web")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/event.git OCA/event")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/website.git OCA/website")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/account-financial-reporting.git OCA/account-financial-reporting")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/account-financial-tools.git OCA/account-financial-tools")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/partner-contact.git OCA/partner-contact")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/hr.git OCA/hr")
+#     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/pos.git OCA/pos")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/commission.git OCA/commission")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/server-tools.git OCA/server-tools")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/reporting-engine.git OCA/reporting-engine")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/rma.git OCA/rma")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/contract.git OCA/contract")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/sale-workflow.git OCA/sale-workflow")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/bank-payment.git OCA/bank-payment")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/bank-statement-import.git OCA/bank-statement-import")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/bank-statement-reconcile.git OCA/bank-statement-reconcile")
+     REPOS=( "${REPOS[@]}" " https://github.com/gastonfeng/product-attribute.git OCA/product-attribute")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/account-invoicing.git OCA/account-invoicing")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/account-closing.git OCA/account-closing")
  fi
 
  if [[ "$CLONE_IT_PROJECTS_LLC" == "yes" ]]
  then
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/e-commerce.git it-projects-llc/e-commerce")
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/pos-addons.git it-projects-llc/pos-addons")
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/access-addons.git it-projects-llc/access-addons")
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/website-addons.git it-projects-llc/website-addons")
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/misc-addons.git it-projects-llc/misc-addons")
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/mail-addons.git it-projects-llc/mail-addons")
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/odoo-saas-tools.git it-projects-llc/odoo-saas-tools")
-     REPOS=( "${REPOS[@]}" "https://github.com/it-projects-llc/odoo-telegram.git it-projects-llc/odoo-telegram")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/e-commerce.git it-projects-llc/e-commerce")
+     #REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/pos-addons.git it-projects-llc/pos-addons")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/access-addons.git it-projects-llc/access-addons")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/website-addons.git it-projects-llc/website-addons")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/misc-addons.git it-projects-llc/misc-addons")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/mail-addons.git it-projects-llc/mail-addons")
+     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/odoo-saas-tools.git it-projects-llc/odoo-saas-tools")
+#     REPOS=( "${REPOS[@]}" "https://github.com/gastonfeng/odoo-telegram.git it-projects-llc/odoo-telegram")
  fi
 
  if [[ "${REPOS}" != "" ]]
