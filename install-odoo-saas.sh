@@ -159,7 +159,7 @@
          rm -rf /var/lib/apt/lists/* wkhtmltox.deb
      fi
 
-     apt-get install -y adduser node-less node-clean-css python3 python3-dateutil python3-decorator python3-docutils python3-feedparser python3-imaging python3-jinja2 python3-ldap python-libxslt1 python3-lxml python3-mako python3-mock python3-openid python3-passlib python3-psutil python3-psycopg2 python3-babel python-pychart python3-pydot python3-pyparsing python-pypdf python3-reportlab python3-requests python3-suds python3-tz python3-vatnumber python-vobject python3-werkzeug python-xlwt python3-yaml
+     apt-get install -y adduser node-less node-clean-css python3 python3-dateutil python3-decorator python3-docutils python3-feedparser python-imaging python3-jinja2 python-ldap python-libxslt1 python3-lxml python3-mako python3-mock python3-openid python3-passlib python3-psutil python3-psycopg2 python3-babel python-pychart python3-pydot python3-pyparsing python-pypdf python3-reportlab python3-requests python3-suds python3-tz python3-vatnumber python-vobject python3-werkzeug python-xlwt python3-yaml
      apt-get install -y python3-gevent python3-simplejson
 
      if [[ "$ODOO_BRANCH" == "8.0" ]]
